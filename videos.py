@@ -6,21 +6,27 @@ out=cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 #VideoWriter->to create a video 
 #20->no of frames per sec,
 #(640,480)->size in which we are capturing
+#output.avi->name of output video
+#fourcc->four by four format
 
 while (cap.isOpened()):
     ret, frame=cap.read() #ret->return frame->object that is read if return gives true
 
     #cv2.imshow('frame',frame) #for original color video
 
-    print(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    if ret==True:
+        print(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-    out.write(frame) 
+        out.write(frame) 
 
-    gray=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('frame',gray)
+        gray=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        cv2.imshow('frame',gray)
 
-    if cv2.waitKey(1) & 0xff==ord('q'): #if q key is pressed loop will break, window closes
+        if cv2.waitKey(1) & 0xff==ord('q'): #if q key is pressed loop will break, window closes
+            break
+
+    else:
         break
 
 cap.release()
